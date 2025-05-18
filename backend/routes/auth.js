@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
@@ -10,17 +9,17 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret'; // use .env in p
 // ✅ Register a new customer
 router.post('/register', async (req, res) => {
   try {
-    const { name, email, password, contact, role } = req.body;
+    const { name, email, password } = req.body;
 
     // Check if user already exists
-    const existingUser = await User.findOne({ $or: [{ email }, { contact }] });
-    if (existingUser) return res.status(400).json({ message: 'Email or contact already in use.' });
+    const existingUser = await User.findOne({ $or: [{ email }] });
+    if (existingUser) return res.status(400).json({ message: 'Email already in use.' });
 
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Save new user
-    const newUser = new User({ name, email, password: hashedPassword, contact, role: role || 'customer' });
+    const newUser = new User({ name, email, password: hashedPassword || 'customer' });
     await newUser.save();
 
     res.status(201).json({ message: 'User registered successfully' });
