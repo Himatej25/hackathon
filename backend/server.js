@@ -4,14 +4,12 @@
     const cors = require('cors');
 
     const authRoutes = require('./routes/auth');
-    const providerAuthRoutes = require('./routes/providerAuth');
 
     const app = express();
 
     // Middleware
     app.use(cors());
     app.use(express.json());
-    app.use('/uploads', express.static('uploads'));
 
     // Connect to MongoDB
     mongoose.connect(process.env.MONGO_URI, {
@@ -23,7 +21,6 @@
 
     // Routes
     app.use('/api/auth', authRoutes);
-    app.use('/api/provider/auth', providerAuthRoutes);
 
     // Start server
     const PORT = process.env.PORT || 5000;
