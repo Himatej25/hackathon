@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up and Service Provider Options</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px; /* Added padding to body for overall spacing */
+            background: linear-gradient(to right, #fceabb, #f8b500);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+
+        .main-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px; /* Slightly larger radius for the combined block */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            width: 700px; /* Adjusted width for the combined content */
+            max-width: 95%;
+            box-sizing: border-box;
+            text-align: center;
+            display: flex; /* Use flexbox for vertical stacking of sections */
+            flex-direction: column;
+            gap: 30px; /* Space between the main sections */
+        }
+
+        header {
+            margin-bottom: 20px; /* Reduced margin since it's inside one block */
+        }
+
+        .signup-header, .section-header {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #333;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 20px; /* Space after header */
+        }
+
+        .signup-header::after, .section-header::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #007bff;
+            border-radius: 2px;
+        }
+
+        main {
+            text-align: left;
+            width: 100%; /* Ensure main takes full width of its parent */
+        }
+
+        .form-section {
+            padding: 25px; /* Padding for each logical section within the main container */
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px; /* Space between sections */
+            text-align: left; /* Align content to the left within each section */
+        }
+
+        .form-section h3 {
+            color: #34495e;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            font-weight: 600;
+            border-bottom: 1px solid #e0e0e0; /* Separator for section headers */
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px; /* Consistent spacing for form groups */
+        }
+
+        .form-group:last-of-type {
+            margin-bottom: 0; /* No bottom margin for the last form group in a section */
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group input[type="email"],
+        .form-group input[type="number"],
+        .form-group input[type="date"],
+        .form-group textarea {
+            width: calc(100% - 24px); /* Account for padding */
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-group input[type="file"] {
+            background-color: #f8f8f8;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #999;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .radio-group div, .checkbox-group div {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-group input[type="radio"],
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 8px;
+            transform: scale(1.1);
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            margin-bottom: 0;
+            cursor: pointer;
+            font-weight: normal;
+        }
+
+        .google-map-link {
+            font-size: 0.9em;
+            color: #3498db;
+            text-decoration: none;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        .google-map-link:hover {
+            text-decoration: underline;
+        }
+
+        .hatched-area {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hatched-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(45deg, #e0e0e0 25%, transparent 25%),
+                              linear-gradient(-45deg, #e0e0e0 25%, transparent 25%),
+                              linear-gradient(45deg, transparent 75%, #e0e0e0 75%),
+                              linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
+            background-size: 10px 10px;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .submit-button {
+            background-color: #28a745;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%; /* Make button take full width */
+            max-width: 400px; /* Limit max width of the button */
+            margin-top: 30px;
+            box-sizing: border-box;
+        }
+
+        .submit-button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <header>
+            <div class="signup-header">
+                Sign Up & Service Preferences
+            </div>
+        </header>
+        <main>
+            <form action="/submit-all" method="POST"> <div class="form-section">
+                    <h3>Sign Up Information</h3>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input id="username" type="text" name="username" placeholder="Enter your username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" name="email" placeholder="Enter your email address" required>
+                    </div>
+                </div>
+
+                <div class="form-section hatched-area">
+                    <h3>Event Details</h3>
+                    <div class="form-group">
+                        <label for="event-date">Select Date:</label>
+                        <input type="date" id="event-date" name="event_date">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Catering Options</h3>
+                    <div class="form-group">
+                        <label>Catering Required?</label>
+                        <div class="radio-group">
+                            <div>
+                                <input type="radio" id="catering_yes" name="catering" value="yes">
+                                <label for="catering_yes">Yes</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="catering_no" name="catering" value="no">
+                                <label for="catering_no">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cost-per-plate">Cost per Plate (Max):</label>
+                        <input type="number" id="cost-per-plate" name="cost_per_plate" placeholder="e.g., 500" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="catering-budget">Budget for Catering (Max):</label>
+                        <input type="number" id="catering-budget" name="catering_budget" placeholder="e.g., 20000" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="cuisine-spec">Veg/Non-veg cuisine specification:</label>
+                        <textarea id="cuisine-spec" name="cuisine_specification" placeholder="Specify cuisine..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Hall Details</h3>
+                    <div class="form-group">
+                        <label for="num-people">No. of people:</label>
+                        <input type="number" id="num-people" name="number_of_people" placeholder="Enter number of attendees" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="hallbudget">Budget for Hall (Max):</label>
+                        <input type="number" id="hallbudget" name="hallbudget" placeholder="e.g., 20000" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="location-address">LOCATION:</label>
+                        <input type="text" id="location-address" name="location_address" placeholder="Type address">
+                        <a href="#" class="google-map-link">Google map Link</a>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Decoration Preferences</h3>
+                    <div class="form-group">
+                        <label for="decorations-theme">Theme:</label>
+                        <input type="text" id="decorations-theme" name="decorations_theme" placeholder="e.g., Rustic, Modern, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="decoration-budget">Budget for Decoration (Max):</label>
+                        <input type="number" id="decoration-budget" name="decoration_budget" placeholder="e.g., 15000" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="occasion-spec">Occasion: preference / specifications</label>
+                        <textarea id="occasion-spec" name="occasion_specifications" placeholder="Type (optional)"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Additional Services</h3>
+                    <div class="form-group">
+                        <label>Photography:</label>
+                        <div class="radio-group">
+                            <div>
+                                <input type="radio" id="photographer_yes" name="photography" value="yes">
+                                <label for="photographer_yes">Yes</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="photographer_no" name="photography" value="no">
+                                <label for="photographer_no">No</label>
+                            </div>
+                        </div>
+                        <input type="text" id="photography-type" name="photography_type" placeholder="Type (optional)" style="margin-top: 10px;">
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label for="photography-budget">Budget for Photography (Max):</label>
+                            <input type="number" id="photography-budget" name="photography_budget" placeholder="e.g., 20000" min="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Fun Activities:</label>
+                        <div class="radio-group">
+                            <div>
+                                <input type="radio" id="activities_yes" name="fun_activities" value="yes">
+                                <label for="activities_yes">Yes</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="activities_no" name="fun_activities" value="no">
+                                <label for="activities_no">No</label>
+                            </div>
+                        </div>
+                        <input type="text" id="activities-type" name="activities_type" placeholder="Type (optional)" style="margin-top: 10px;">
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label for="activities-budget">Budget for Fun Activities (Max):</label>
+                            <input type="number" id="activities-budget" name="activities_budget" placeholder="e.g., 10000" min="0">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button">Sign Up & Submit Preferences</button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
